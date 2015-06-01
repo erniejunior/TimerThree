@@ -150,7 +150,18 @@ class TimerThree
 	TIMSK3 = 0;
     }
     static void (*isrCallback)();
-
+    
+    //****************************
+    //  Counter and Period Access
+    //****************************
+    uint16_t getCurrenCount() {
+      return TCNT3;
+    }
+    
+    unsigned short getPeriod() {
+      return pwmPeriod;
+    }
+    
   private:
     // properties
     static unsigned short pwmPeriod;
@@ -284,6 +295,17 @@ class TimerThree
 	NVIC_DISABLE_IRQ(IRQ_FTM2);
     }
     static void (*isrCallback)();
+    
+    //****************************
+    //  Counter and Period Access
+    //****************************
+    uint16_t getCurrenCount() __attribute__((always_inline)) {
+      return FTM2_CNT;
+    }
+    
+    unsigned short getPeriod() __attribute__((always_inline)) {
+      return pwmPeriod;
+    }
 
   private:
     // properties
